@@ -17,24 +17,27 @@ public class NoteView extends JPanel implements Observer {
 	    textArea.setPreferredSize(new Dimension(650, 500));
 	    textArea.setMinimumSize(new Dimension(650,500));
 	    
+	    textArea.setText(model.getText());
+	    
 	    this.add(textArea);
+	    
+	  
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	@Override
 	public void update(Observable o, Object arg1) {
+		this.textArea.setText(model.getText());
 		
+	}
+	
+	//for text
+	
+	public void setTextInTA(String text){
+		textArea.setText(text);
 	}
 	
 	
