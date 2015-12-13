@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -15,13 +16,24 @@ public class MainTest {
 	final JPanel mPanel = new JPanel();  // main-main panel
 	final JPanel mPanel1 = new JPanel(); // - for notes list
 	final JPanel mPanel2 = new JPanel(); // - for 1 note (to edit)
+	final JPanel emptypanel = new JPanel();
+	final JLabel emptypic = new JLabel();
 	
-	private JButton swtch = new JButton();
-	private NoteInList nit = new NoteInList("Title","Text","tag tag tag");
 	
-	Note n = new Note("Hey!");
-	Note n1 = new Note("Note2");
-	
+	 Protocol p = new Protocol();
+	 
+	 NoteList ntList = new NoteList();
+	 final JPanel mPanel1R = new JPanel();  //Right
+	 final JPanel mPanel1RT = new JPanel(); //Right - Top
+	 final JPanel mPanel1RTE = new JPanel();  //Right - Top - East
+	 
+	 final JLabel info = new JLabel();
+	 final JLabel neww = new JLabel(); 
+	 
+	 final JPanel close = new JPanel(); 
+	 final JLabel closepic = new JLabel(); 
+
+		
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -32,34 +44,106 @@ public class MainTest {
 	}
 	
 	 public MainTest()  {
-		
-		Color color = new Color(51, 102,255);
-		Color color1 = new Color(255,204,51);
-		
-		mPanel1.add(n);
-		mPanel2.add(n1);
 	
-		frame.setLocationRelativeTo(null);
-		frame.setAlwaysOnTop(true);
+		mPanel1.setLayout(new BorderLayout());
+
 		
-		mPanel1.setBackground(color);
-		mPanel2.setBackground(color1);
+		info.setIcon(Protocol.info);
+		neww.setIcon(Protocol.neww);
 		
-		swtch.setText("Switch");
+		mPanel1RTE.add(info);
+		mPanel1RTE.add(neww);
 		
-		swtch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (mPanel2.isVisible()==true){
-					mPanel2.setVisible(false);
-					mPanel1.setVisible(true);
-				}
-				else{
-					mPanel2.setVisible(true);
-					mPanel1.setVisible(false);
-				}
-			}
-		});
+		mPanel1RT.setLayout(new BorderLayout());	
+		mPanel1RT.add(mPanel1RTE,BorderLayout.EAST);
 		
+		mPanel1R.setLayout(new BorderLayout());
+		mPanel1R.setPreferredSize(new Dimension(300,40));
+		//mPanel1R.setMaximumSize(new Dimension(1920,30));
+		mPanel1R.add(mPanel1RT,BorderLayout.NORTH);
+		
+		
+		//pic for empty list
+		emptypic.setIcon(Protocol.empty);
+		emptypanel.setLayout(new BorderLayout());
+		emptypanel.add(emptypic,BorderLayout.WEST);
+		
+		
+		closepic.setIcon(Protocol.del);
+		close.setLayout(new BorderLayout());
+		close.add(closepic,BorderLayout.NORTH);
+		emptypanel.add(close,BorderLayout.EAST);
+		
+		
+		
+		mPanel1.add(mPanel1R,BorderLayout.EAST);
+		mPanel1.add(emptypanel,BorderLayout.CENTER);
+		mPanel1.add(ntList,BorderLayout.WEST);
+		
+		
+		
+		
+		ntList.addNoteInList(new NoteInList("Note #1","Text ot the first note","tag tag tag"));
+		ntList.addNoteInList(new NoteInList("Note #2","Text ot the second note","tag tag tag"));
+		ntList.addNoteInList(new NoteInList("Note #3","Text ot the third note","tag tag tag"));
+		
+		
+		
+		//SET BG COLORS
+		
+		mPanel.setBackground(Protocol.nbColor);
+		mPanel1.setBackground(Protocol.nbColor);
+		mPanel2.setBackground(Protocol.nbColor);
+		emptypanel.setBackground(Protocol.nbColor);
+		mPanel1R.setBackground(Protocol.nbColor);
+		mPanel1RT.setBackground(Protocol.nbColor);
+		mPanel1RTE.setBackground(Protocol.nbColor);
+		ntList.setBackground(Protocol.nbColor);
+		close.setBackground(Protocol.nbColor);
+		
+		
+		MainTest obj = this;
+		
+		
+		//ACTION LISTENERS
+		neww.addMouseListener(new MouseAdapter(){
+			   public void mouseClicked(MouseEvent e) {
+				     mPanel1.setVisible(false);
+				     mPanel2.setVisible(true);
+		
+				   }
+				});
+		
+		closepic.addMouseListener(new MouseAdapter(){
+			   public void mouseClicked(MouseEvent e) {
+				   emptypanel.setVisible(false);
+				   }
+				});
+		
+		
+		
+		
+		
+		mPanel.add(mPanel1);
+		mPanel.add(mPanel2);
+		
+		mPanel2.setVisible(false);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
 		mPanel2.addMouseListener(new MouseAdapter(){
 			   public void mouseClicked(MouseEvent e) {
 				     mPanel2.setVisible(false);
@@ -70,20 +154,11 @@ public class MainTest {
 		
 		
 		
-		
-		
-		mPanel.add(mPanel1);
-		mPanel.add(mPanel2);
-		mPanel.add(swtch);
-		
-		mPanel2.add(nit);
-		
-		mPanel2.setVisible(false);
 
 		frame.add(mPanel);
 		
-		//mPanel2.setVisible(false);
-		//mPanel1.setVisible(false);
+		frame.setLocationRelativeTo(null);
+		frame.setAlwaysOnTop(true);
 		
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
