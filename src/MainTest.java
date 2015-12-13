@@ -2,6 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.Observer;
 
@@ -15,7 +17,7 @@ public class MainTest {
 	final JPanel mPanel2 = new JPanel(); // - for 1 note (to edit)
 	
 	private JButton swtch = new JButton();
-	
+	private NoteInList nit = new NoteInList("Title","Text","tag tag tag");
 	
 	Note n = new Note("Hey!");
 	Note n1 = new Note("Note2");
@@ -33,7 +35,7 @@ public class MainTest {
 		
 		Color color = new Color(51, 102,255);
 		Color color1 = new Color(255,204,51);
-		//frame.setUndecorated(true);
+		
 		mPanel1.add(n);
 		mPanel2.add(n1);
 	
@@ -58,6 +60,13 @@ public class MainTest {
 			}
 		});
 		
+		mPanel2.addMouseListener(new MouseAdapter(){
+			   public void mouseClicked(MouseEvent e) {
+				     mPanel2.setVisible(false);
+				     mPanel1.setVisible(true);
+				   }
+				});
+		
 		
 		
 		
@@ -67,10 +76,11 @@ public class MainTest {
 		mPanel.add(mPanel2);
 		mPanel.add(swtch);
 		
+		mPanel2.add(nit);
+		
 		mPanel2.setVisible(false);
 
 		frame.add(mPanel);
-		//frame.add(mPanel2);
 		
 		//mPanel2.setVisible(false);
 		//mPanel1.setVisible(false);
@@ -82,3 +92,6 @@ public class MainTest {
 	}
 	
 }
+//frame.setUndecorated(true);
+
+

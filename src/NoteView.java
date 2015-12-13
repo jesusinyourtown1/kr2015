@@ -8,6 +8,7 @@ import javax.swing.JTextArea;
 public class NoteView extends JPanel implements Observer {
 	
 	private NoteModel model;
+	private  NoteInList noteinlist;
 	private final JTextArea textArea = new JTextArea();
 	
 	public NoteView(NoteModel model) {
