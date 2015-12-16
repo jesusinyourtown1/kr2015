@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
@@ -7,17 +8,20 @@ import java.awt.event.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 public class NoteInList extends JPanel {
 	
 	private String title;
 	private String text;
 	private String tags;
+	private boolean isFav;
 	
 	private JLabel titleLabel = new JLabel(this.title, SwingConstants.RIGHT);
 	private JLabel textLabel = new JLabel(this.text, SwingConstants.RIGHT);
@@ -57,7 +61,7 @@ public class NoteInList extends JPanel {
 		textLabel.setFont(Protocol.SFFont);
 		
 		tagsLabel.setFont(tagsLabel.getFont().deriveFont(15.0f));
-		textLabel.setFont(tagsLabel.getFont().deriveFont(20.0f));
+		textLabel.setFont(textLabel.getFont().deriveFont(14.0f));
 		
 		
 		
@@ -70,6 +74,7 @@ public class NoteInList extends JPanel {
 		top.add(titleLabel,BorderLayout.WEST);
 		
 		del.setIcon(Protocol.del);
+		del.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		del.setPreferredSize(new Dimension(30,30));
 		top.add(del,BorderLayout.EAST);
 		
@@ -81,15 +86,28 @@ public class NoteInList extends JPanel {
 		middle.setPreferredSize(new Dimension(300, 80));
 		
 		//нижняя часть
-		
-
-		
+	
 		bottom.setLayout(new BorderLayout());
 		
 		
 		
 		
+		//Animation
+		del.addMouseListener(new MouseAdapter(){
+			   public void mouseEntered(MouseEvent e) {
+				   del.setIcon(Protocol.del_action);
+				   }
+		});
+		del.addMouseListener(new MouseAdapter(){
+			   public void mouseExited(MouseEvent e) {
+				   del.setIcon(Protocol.del);
+				   }
+		});
 		
+		
+		NoteInList obj = this;
+		
+	
 		
 		
 		
@@ -136,22 +154,41 @@ public class NoteInList extends JPanel {
 		
 		//ACTION
 		
-		NoteInList obj = this;
+		
 		
 		del.addMouseListener(new MouseAdapter(){
 			   public void mouseClicked(MouseEvent e) {
 				     obj.setVisible(false);
+				     notifyNoteList();
 		
 				   }
 				});
-		
-		
 	}
 	
 	
 	
+	public void notifyNoteList(){
+		NoteList.check();
+	}
 	
+
+	//getters
 	
+	public String getTitle(){
+		return title;
+	}
+	
+	public String getText(){
+		return text;
+	}
+	
+	public String getTags(){
+		return tags;
+	}
+	
+	public boolean getFav(){
+		return isFav;
+	}
 
 	
 	

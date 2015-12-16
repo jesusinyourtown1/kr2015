@@ -1,6 +1,11 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -12,26 +17,58 @@ import javax.swing.*;
 
 public class MainTest {
 	final JFrame frame = new JFrame("TagIT");
+
 	
+	//Main panels
+
 	final JPanel mPanel = new JPanel();  // main-main panel
 	final JPanel mPanel1 = new JPanel(); // - for notes list
-	final JPanel mPanel2 = new JPanel(); // - for 1 note (to edit)
-	final JPanel emptypanel = new JPanel();
-	final JLabel emptypic = new JLabel();
+	final JPanel mPanel2 = new JPanel(); // - for new note
+	final JPanel infoPanel = new JPanel(); // - for info
+	final JPanel tutoPanel = new JPanel(); // - for info
 	
 	
-	 Protocol p = new Protocol();
+	//mPanel1 components
+		
+		//panels
+			final JPanel emptypanel = new JPanel(); 
+			final JPanel mPanel1R = new JPanel();  //Right
+			final JPanel mPanel1RT = new JPanel(); //Right - Top
+			final JPanel mPanel1RTE = new JPanel();  //Right - Top - East
+			final JPanel close = new JPanel(); 
+	
+		//labels
+			final JLabel emptypic = new JLabel();
+			final JLabel info = new JLabel();
+			final JLabel neww = new JLabel(); 
+			final JLabel closepic = new JLabel(); 
+	
+			
+	//infoPanel components	
+		
+		//panels
+			final JPanel newnote_panel = new JPanel(); 
+			final JLayeredPane layeredPane = new JLayeredPane();
+			
+		//labels	
+			final JLabel newbg_label = new JLabel();
+			
+			
+	//mPanel2
+			
+		    private JLayeredPane lpane = new JLayeredPane();
+		    private JPanel panelBlue = new JPanel();
+		    private JPanel panelGreen = new JPanel();
+			
+	
 	 
-	 NoteList ntList = new NoteList();
-	 final JPanel mPanel1R = new JPanel();  //Right
-	 final JPanel mPanel1RT = new JPanel(); //Right - Top
-	 final JPanel mPanel1RTE = new JPanel();  //Right - Top - East
 	 
-	 final JLabel info = new JLabel();
-	 final JLabel neww = new JLabel(); 
-	 
-	 final JPanel close = new JPanel(); 
-	 final JLabel closepic = new JLabel(); 
+	
+	 //not GUI variables
+		Protocol p = new Protocol();
+		NoteList ntList = new NoteList();
+		
+		
 
 		
 	public static void main(String[] args) {
@@ -43,13 +80,37 @@ public class MainTest {
 		});
 	}
 	
+	
+	
 	 public MainTest()  {
+		 
+		 Toolkit kit = Toolkit.getDefaultToolkit();
+		 Image img = kit.getImage("icon.png");
+		 frame.setIconImage(img);
+		 
+		 
+		 
+		 
+//ALL ABOUT TUTORIAL PANEL 1
+		 
+		 
+		 
+//ALL ABOUT MAIN PANEL 1 (note list, new button)
 	
 		mPanel1.setLayout(new BorderLayout());
 
 		
+		ntList.add(new NoteInList("English","From the sunny beaches","#eng #USA #homework"));
+		ntList.add(new NoteInList("Swift","Swift Community -facebook.com/swift_kh","#swift #programming #iOS_dev"));
+		ntList.add(new NoteInList("Games","To download: The Settlers 6","#games"));
+		ntList.add(new NoteInList("Vsauce","To Google: How Shazam works?","#vsause #video"));
+		
+		
 		info.setIcon(Protocol.info);
 		neww.setIcon(Protocol.neww);
+		
+		info.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		neww.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 		mPanel1RTE.add(info);
 		mPanel1RTE.add(neww);
@@ -69,7 +130,8 @@ public class MainTest {
 		emptypanel.add(emptypic,BorderLayout.WEST);
 		
 		
-		closepic.setIcon(Protocol.del);
+		closepic.setIcon(Protocol.del1);
+		closepic.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		close.setLayout(new BorderLayout());
 		close.add(closepic,BorderLayout.NORTH);
 		emptypanel.add(close,BorderLayout.EAST);
@@ -79,13 +141,6 @@ public class MainTest {
 		mPanel1.add(mPanel1R,BorderLayout.EAST);
 		mPanel1.add(emptypanel,BorderLayout.CENTER);
 		mPanel1.add(ntList,BorderLayout.WEST);
-		
-		
-		
-		
-		ntList.addNoteInList(new NoteInList("Note #1","Text ot the first note","tag tag tag"));
-		ntList.addNoteInList(new NoteInList("Note #2","Text ot the second note","tag tag tag"));
-		ntList.addNoteInList(new NoteInList("Note #3","Text ot the third note","tag tag tag"));
 		
 		
 		
@@ -100,16 +155,26 @@ public class MainTest {
 		mPanel1RTE.setBackground(Protocol.nbColor);
 		ntList.setBackground(Protocol.nbColor);
 		close.setBackground(Protocol.nbColor);
+		frame.setBackground(Protocol.nbColor);
 		
-		
-		MainTest obj = this;
-		
-		
-		//ACTION LISTENERS
+				
+		//ACTION LISTENERS ALS
 		neww.addMouseListener(new MouseAdapter(){
 			   public void mouseClicked(MouseEvent e) {
 				     mPanel1.setVisible(false);
 				     mPanel2.setVisible(true);
+				     
+				     
+				//     mPanel.setVisible(false);
+						mPanel1.setVisible(false);
+						emptypanel.setVisible(false);
+						mPanel1R.setVisible(false);
+						mPanel1RT.setVisible(false);
+						mPanel1RTE.setVisible(false);
+						ntList.setVisible(false);
+						close.setVisible(false);
+				     
+				     
 		
 				   }
 				});
@@ -120,53 +185,121 @@ public class MainTest {
 				   }
 				});
 		
-		
-		
-		
-		
-		mPanel.add(mPanel1);
-		mPanel.add(mPanel2);
-		
-		mPanel2.setVisible(false);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
-		mPanel2.addMouseListener(new MouseAdapter(){
+		info.addMouseListener(new MouseAdapter(){
 			   public void mouseClicked(MouseEvent e) {
-				     mPanel2.setVisible(false);
-				     mPanel1.setVisible(true);
+				   mPanel1.setVisible(false);
+				   infoPanel.setVisible(true);
 				   }
 				});
 		
 		
 		
 		
+		
+		
+		
+		
+	
+		//something like animation
+		
+		
+		
+		neww.addMouseListener(new MouseAdapter(){
+			   public void mouseEntered(MouseEvent e) {
+				   	neww.setIcon(Protocol.plus_action);
+				   }
+		});
+		neww.addMouseListener(new MouseAdapter(){
+			   public void mouseExited(MouseEvent e) {
+				   	neww.setIcon(Protocol.neww);
+				   }
+		});
+		
+		info.addMouseListener(new MouseAdapter(){
+			   public void mouseEntered(MouseEvent e) {
+				   info.setIcon(Protocol.info_action);
+				   }
+		});
+		info.addMouseListener(new MouseAdapter(){
+			   public void mouseExited(MouseEvent e) {
+				   info.setIcon(Protocol.info);
+				   }
+		});
+		
+		
+		closepic.addMouseListener(new MouseAdapter(){
+			   public void mouseEntered(MouseEvent e) {
+				   closepic.setIcon(Protocol.del_padd_action);
+				   }
+		});
+		closepic.addMouseListener(new MouseAdapter(){
+			   public void mouseExited(MouseEvent e) {
+				   closepic.setIcon(Protocol.del1);
+				   }
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//ALL ABOUT MAIN PANEL 2 (new note)
+		
 
+		newbg_label.setIcon(Protocol.new_bg);
+		
+		
+
+		mPanel2.setPreferredSize(new Dimension(1300, 1000));
+		mPanel2.setLayout(new BorderLayout());
+		mPanel2.add(lpane, BorderLayout.CENTER);
+		        lpane.setBounds(0, -100, 1300, 1000);
+		        panelBlue.add(newbg_label);
+		        panelBlue.setBounds(0,0, 1300, 1000);
+		        panelBlue.setOpaque(true);
+		        panelGreen.add(new NoteInList("Try title","Try text","tag tag tag"));
+		        panelGreen.setBounds(500, 310, 310,145);
+		        panelGreen.setOpaque(true);
+		        lpane.add(panelBlue, new Integer(0), 0);
+		        lpane.add(panelGreen, new Integer(1), 0);
+		    
+		        
+		        
+	//	newnote_panel.setOpaque(false);
+	//	newnote_panel.add(new NoteInList("Title4","text1","tag tag tag"));
+	//	mPanel2.add(newnote_panel);
+	//	newbg_label.setIcon(Protocol.new_bg);
+	//	newbg_label.setBorder(null);
+		//layeredPane.add(newbg_label);
+	//	mPanel2.add(newbg_label);
+	//	layeredPane.add(new NoteInList("Title4","text1","tag tag tag"), new Integer(2));
+		
+	//	mPanel2.add(layeredPane,new Integer(2), 0);
+		
+		
+		
+		
+		
+		
+		// adding to the main panel
+		mPanel.add(mPanel1);
+		mPanel.add(mPanel2);
+		
+		// hiding all main panels except start panel (1)
+		mPanel2.setVisible(false);
+			
+		//adding main panel on frame
 		frame.add(mPanel);
-		
 		frame.setLocationRelativeTo(null);
-		frame.setAlwaysOnTop(true);
-		
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
-	}
-	
+	}	
 }
-//frame.setUndecorated(true);
 
 
