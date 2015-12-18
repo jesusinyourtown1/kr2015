@@ -7,20 +7,25 @@ public class NoteModel  extends Observable{
 	
 	//VARIABLES
 	
-	private String name;
+	private String title;
 	private String text;
 	private ArrayList<String>  tagsArr = new ArrayList<String>();
+	private boolean isFav;
+	
 	//private ArrayList<String>  membersArr = new ArrayList<String>();
 	//private Calendar cal;
 	//private SimpleDateFormat dateFormat;
 	
 	//CONSTRUCTORS
 	
-	/*	NoteModel(){
-		dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		cal = Calendar.getInstance();
-		dateFormat.format(cal.getTime());
-	}*/
+	NoteModel(String title,String text, ArrayList<String>  tagsArr, boolean isFav){
+		this.title=title;
+		this.text=text;
+		this.tagsArr=tagsArr;
+		this.isFav=isFav;
+		
+	}
+	
 	
 	
 	//METHODS
