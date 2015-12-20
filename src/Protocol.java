@@ -37,6 +37,30 @@ public class Protocol {
 	public static  ImageIcon info_action;
 	public static  ImageIcon del_action;
 	public static  ImageIcon del_padd_action;
+	
+	
+	//for tuto
+	
+	public static  ImageIcon startTour;
+	public static  ImageIcon startTourAction;
+	
+	public static  ImageIcon nextTour;
+	public static  ImageIcon nextTourAction;
+	
+	public static  ImageIcon skipTour;
+	public static  ImageIcon skipTourAction;
+	
+	public static  ImageIcon tour1;
+	public static  ImageIcon tour2;
+	public static  ImageIcon tour3;
+	public static  ImageIcon tour4;
+	public static  ImageIcon tour5;
+	
+	public static  ImageIcon warning;
+	public static  ImageIcon bugsWarn;
+	public static  ImageIcon bugsWarnAction;
+	
+	
 
 	
 	//Fonts
@@ -94,6 +118,56 @@ public class Protocol {
 			
 			myPicture = ImageIO.read(new File("del_padd_action.png"));
 			del_padd_action = new ImageIcon(Protocol.myPicture);
+			
+			
+			//for tuto
+			
+			myPicture = ImageIO.read(new File("startTour.png"));
+			startTour = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("startTourAction.png"));
+			startTourAction = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("nextTour.png"));
+			nextTour = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("nextTourAction.png"));
+			nextTourAction = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("skipTour.png"));
+			skipTour = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("skipTourAction.png"));
+			skipTourAction = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("tour1.png"));  // tuto: intro
+			tour1 = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("tour2.png"));  // tuto: info and new
+			tour2 = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("tour3.png")); // 
+			tour3 = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("tour3.png")); // 
+			tour3 = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("tour4.png")); // 
+			tour4 = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("tour5.png")); // 
+			tour5 = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("warning.png")); // 
+			warning = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("bugsWarn.png")); // 
+			bugsWarn = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("bugsWarnAction.png")); // 
+			bugsWarnAction = new ImageIcon(Protocol.myPicture);
+			
+			
 			
 			
 			SFFont = Font.createFont(Font.TRUETYPE_FONT, new File("System.ttf")).deriveFont(12f);
