@@ -61,6 +61,24 @@ public class Protocol {
 	public static  ImageIcon bugsWarnAction;
 	
 	
+	//for note views 
+	
+	public static  ImageIcon backButton;
+	public static  ImageIcon favButton;
+	public static  ImageIcon tagButton;
+	public static  ImageIcon editButton;
+	public static  ImageIcon saveButton;
+	public static  ImageIcon createButton;
+	
+	public static  ImageIcon backButtonAction;
+	public static  ImageIcon favButtonAction;
+	public static  ImageIcon tagButtonAction;
+	public static  ImageIcon editButtonAction;
+	public static  ImageIcon saveButtonAction;
+	public static  ImageIcon createButtonAction;
+	
+	
+	
 
 	
 	//Fonts
@@ -166,6 +184,47 @@ public class Protocol {
 			
 			myPicture = ImageIO.read(new File("bugsWarnAction.png")); // 
 			bugsWarnAction = new ImageIcon(Protocol.myPicture);
+			
+			
+			//for note view
+			
+			myPicture = ImageIO.read(new File("backButton.png")); // 
+			backButton = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("tagButton.png")); // 
+			tagButton = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("favButton.png")); // 
+			favButton = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("editButton.png")); // 
+			editButton = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("saveButton.png")); // 
+			saveButton = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("createButton.png")); // 
+			createButton = new ImageIcon(Protocol.myPicture);
+			
+			
+			myPicture = ImageIO.read(new File("backButtonAction.png")); // 
+			backButtonAction = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("tagButtonAction.png")); // 
+			tagButtonAction = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("favButtonAction.png")); // 
+			favButtonAction = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("editButtonAction.png")); // 
+			editButtonAction = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("saveButtonAction.png")); // 
+			saveButtonAction = new ImageIcon(Protocol.myPicture);
+			
+			myPicture = ImageIO.read(new File("createButtonAction.png")); // 
+			createButtonAction = new ImageIcon(Protocol.myPicture);
+			
 			
 			
 			

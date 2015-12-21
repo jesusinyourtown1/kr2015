@@ -354,7 +354,14 @@ public class MainTest {
 		newbg_label.setIcon(Protocol.new_bg);
 		
 		
-
+		  //TEST!!!!!
+		
+		  SingleNoteView snvTest = new SingleNoteView("Test title","text text text","tag tag tag");
+		
+		  panelBlue.setBackground(new Color(170, 170,170));
+		  panelGreen.setBackground(Protocol.nbColor);
+		  
+		  
 		mPanel2.setPreferredSize(new Dimension(1300, 1000));
 		mPanel2.setLayout(new BorderLayout());
 		mPanel2.add(lpane, BorderLayout.CENTER);
@@ -362,8 +369,8 @@ public class MainTest {
 		        panelBlue.add(newbg_label);
 		        panelBlue.setBounds(0,0, 1300, 1000);
 		        panelBlue.setOpaque(true);
-		        panelGreen.add(new NoteInList("Try title","Try text","tag tag tag"));
-		        panelGreen.setBounds(500, 310, 310,145);
+		        panelGreen.add(snvTest);
+		        panelGreen.setBounds(446, 260, 410,310);
 		        panelGreen.setOpaque(true);
 		        lpane.add(panelBlue, new Integer(0), 0);
 		        lpane.add(panelGreen, new Integer(1), 0);
@@ -382,8 +389,11 @@ public class MainTest {
 	//	mPanel2.add(layeredPane,new Integer(2), 0);
 		
 		
+		//TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		        
+		  
 		
-		
+
 		
 		
 		// adding to the main panel
@@ -397,7 +407,7 @@ public class MainTest {
 			
 		//adding main panel on frame
 		frame.add(mPanel);
-		frame.setLocationRelativeTo(null);
+	//	frame.setLocationRelativeTo(null);
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);

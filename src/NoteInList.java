@@ -110,9 +110,7 @@ public class NoteInList extends JPanel {
 	
 		
 		
-		
-		
-		
+	
 		image.setIcon(Protocol.tag);
 		image.setPreferredSize(new Dimension(30,30));
 		bottom.add(image,BorderLayout.WEST);
