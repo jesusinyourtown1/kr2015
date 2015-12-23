@@ -122,16 +122,7 @@ public class NoteViewBottom extends JPanel {
 		});
 		
 		
-		favButton.addMouseListener(new MouseAdapter(){
-			   public void mouseEntered(MouseEvent e) {
-				   favButton.setIcon(Protocol.favButtonAction);
-				   }
-		});
-		favButton.addMouseListener(new MouseAdapter(){
-			   public void mouseExited(MouseEvent e) {
-				   favButton.setIcon(Protocol.favButton);
-				   }
-		});
+
 		
 		
 		tagButton.addMouseListener(new MouseAdapter(){

@@ -79,6 +79,9 @@ public class Protocol {
 	
 	
 	
+	//TEST
+	static int counter;
+	static NoteInList tmpNIL;
 
 	
 	//Fonts

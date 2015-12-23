@@ -5,10 +5,9 @@ import javax.swing.JPanel;
 
 public class NoteList extends JPanel {
 	
-	private static ArrayList<NoteInList> nilArr = new ArrayList<NoteInList>();
-	private static ArrayList<SingleNoteView> vArr = new ArrayList<SingleNoteView>();
-	private static ArrayList<EditNoteView> eArr = new ArrayList<EditNoteView>();
-	
+	public  ArrayList<NoteInList> nilArr = new ArrayList<NoteInList>();
+//	private static ArrayList<SingleNoteView> vArr = new ArrayList<SingleNoteView>();
+//	private static ArrayList<EditNoteView> eArr = new ArrayList<EditNoteView>();
 	
 	
 	NoteList(){
@@ -24,7 +23,7 @@ public class NoteList extends JPanel {
 	
 	
 	
-	public void add(String title,String text, String tags, boolean isFav){
+	public void adds(String title,String text, String tags, boolean isFav){
 		NoteInList tmp_nil = new NoteInList(title,text,tags);
 		nilArr.add(tmp_nil);
 		this.add(tmp_nil);
@@ -41,7 +40,7 @@ public class NoteList extends JPanel {
 	
 	
 
-	public static void check(){
+	public  void check(){
 		for (int i=0; i<nilArr.size();i++){
 			if (nilArr.get(i).isVisible()==false){
 				nilArr.remove(i);

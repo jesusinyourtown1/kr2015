@@ -157,7 +157,7 @@ public class NoteInList extends JPanel {
 		del.addMouseListener(new MouseAdapter(){
 			   public void mouseClicked(MouseEvent e) {
 				     obj.setVisible(false);
-				     notifyNoteList();
+				   //  notifyNoteList();
 		
 				   }
 				});
@@ -165,10 +165,7 @@ public class NoteInList extends JPanel {
 	
 	
 	
-	public void notifyNoteList(){
-		NoteList.check();
-	}
-	
+
 
 	//getters
 	

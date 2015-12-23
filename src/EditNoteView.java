@@ -7,13 +7,22 @@ import java.awt.event.MouseEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 public class EditNoteView extends JPanel {
 	
-	private JLabel titleLabel; 
-	private JLabel textLabel;
-	private JLabel tagsLabel; 
+	private boolean fav;
+	
+	public NoteViewBottom nvbTest;
+	
+	final JTextArea titleArea;
+	final JTextArea textArea;
+	final JTextArea tagsArea;
+	
+	//private JLabel titleLabel; 
+	//private JLabel textLabel;
+	//private JLabel tagsLabel; 
 	
 	private JPanel main = new JPanel();
 	private JPanel top = new JPanel();
@@ -31,25 +40,38 @@ public class EditNoteView extends JPanel {
 	private JLabel del = new JLabel();
 
 	EditNoteView(String title,String text,String tags){
-		titleLabel = new JLabel(title, SwingConstants.RIGHT);
-		textLabel = new JLabel(text, SwingConstants.RIGHT);
-		tagsLabel = new JLabel(tags, SwingConstants.RIGHT);
 		
-		titleLabel.setFont(Protocol.SFFontT);
-		tagsLabel.setFont(Protocol.SFFont);
-		textLabel.setFont(Protocol.SFFont);
 		
-		tagsLabel.setFont(tagsLabel.getFont().deriveFont(17.0f));
-		textLabel.setFont(textLabel.getFont().deriveFont(15.0f));
+		// FAV
+			
+		 titleArea = new JTextArea(title);
+		 textArea = new JTextArea(title);
+		 tagsArea = new JTextArea(title);
+		
+		
+	//	titleLabel = new JLabel(title, SwingConstants.RIGHT);
+	//	textLabel = new JLabel(text, SwingConstants.RIGHT);
+	//	tagsLabel = new JLabel(tags, SwingConstants.RIGHT);
+		
+		titleArea.setFont(Protocol.SFFontT);
+		tagsArea.setFont(Protocol.SFFont);
+		textArea.setFont(Protocol.SFFont);
+		
+		titleArea.setBackground(Protocol.nbColor);
+		tagsArea.setBackground(Protocol.nbColor);
+		textArea.setBackground(Protocol.nbColor);
+		
+		tagsArea.setFont(tagsArea.getFont().deriveFont(17.0f));
+		textArea.setFont(textArea.getFont().deriveFont(15.0f));
 	//	titleLabel.setFont(textLabel.getFont().deriveFont(20.0f));
 		
-		titleLabel.setForeground(Protocol.accentColor);
+		titleArea.setForeground(Protocol.accentColor);
 		
 		
 		//заголовок
 		
 		top.setLayout(new BorderLayout());
-		top.add(titleLabel,BorderLayout.WEST);
+		top.add(titleArea,BorderLayout.WEST);
 		
 		del.setIcon(Protocol.del);
 		del.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -60,7 +82,7 @@ public class EditNoteView extends JPanel {
 		
 		//основной текст
 		
-		middle.add(textLabel);
+		middle.add(textArea);
 		middle.setPreferredSize(new Dimension(410, 140));
 		
 		//нижняя часть
@@ -93,17 +115,56 @@ public class EditNoteView extends JPanel {
 		image.setPreferredSize(new Dimension(30,30));
 		bottomNorth.add(image,BorderLayout.WEST);
 		
-		tagsLabel.setPreferredSize(new Dimension(30,30));
+		tagsArea.setPreferredSize(new Dimension(30,30));
 		
-		bottomNorth.add(tagsLabel,BorderLayout.CENTER);	
+		bottomNorth.add(tagsArea,BorderLayout.CENTER);	
 		
 		//TEST
 		
-		 NoteViewBottom nvbTest = new NoteViewBottom();
-	     nvbTest.create(1);
+		 nvbTest = new NoteViewBottom();
+	     nvbTest.create(3);
 	     nvbTest.setOpaque(true);
 	     
-	     
+		 nvbTest.favButton.addMouseListener(new MouseAdapter(){
+			   public void mouseClicked(MouseEvent e) {
+				 if (isFav()==true){
+					 nvbTest.favButton.setIcon(Protocol.favButton);
+					 fav=false;
+				 }
+				 else{
+					 nvbTest.favButton.setIcon(Protocol.favButtonAction);
+					 fav=true;
+				 }
+			   }
+		   });
+		
+			
+		 
+		 nvbTest.favButton.addMouseListener(new MouseAdapter(){
+			   public void mouseEntered(MouseEvent e) {
+				   if (isFav()==false){
+					   nvbTest.favButton.setIcon(Protocol.favButtonAction);  
+				   }
+			   }
+				  
+		});
+		 nvbTest.favButton.addMouseListener(new MouseAdapter(){
+			   public void mouseExited(MouseEvent e) {
+				   if (isFav()==true){
+					   nvbTest.favButton.setIcon(Protocol.favButtonAction);
+					   }
+					   else{
+						nvbTest.favButton.setIcon(Protocol.favButton);  
+					   }
+				   }
+		});
+		 
+		 
+		 
+		 
+		 
+		 
+		 
 	     
 	     bottomSouth.add(nvbTest,BorderLayout.WEST);
 		
@@ -168,6 +229,20 @@ public class EditNoteView extends JPanel {
 		
 				   }
 				});
+	}
+	
+	
+	//FAV
+	
+	
+
+
+	
+	
+	
+	public boolean isFav(){
+		return fav;
+		
 	}
 	
 	

@@ -201,10 +201,10 @@ public class MainTest {
 		JScrollPane ntListScroll = new JScrollPane(ntList);
 		//ntListScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
-		ntList.add(new NoteInList("English","From the sunny beaches","#eng #USA #homework"));
-		ntList.add(new NoteInList("Swift","Swift Community -facebook.com/swift_kh","#swift #programming #iOS_dev"));
-		ntList.add(new NoteInList("Games","To download: The Settlers 6","#games"));
-		ntList.add(new NoteInList("Vsauce","To Google: How Shazam works?","#vsause #video"));
+		ntList.adds("English","From the sunny beaches","#eng #USA #homework",true);
+		ntList.adds("Swift","Swift Community -facebook.com/swift_kh","#swift #programming #iOS_dev",false);
+		ntList.adds("Games","To download: The Settlers 6","#games",true);
+		ntList.adds("Vsauce","To Google: How Shazam works?","#vsause #video",true);
 
 		
 		info.setIcon(Protocol.info);
@@ -260,7 +260,7 @@ public class MainTest {
 		
 				
 		//ACTION LISTENERS ALS
-		neww.addMouseListener(new MouseAdapter(){
+	/*	neww.addMouseListener(new MouseAdapter(){
 			   public void mouseClicked(MouseEvent e) {
 				     mPanel1.setVisible(false);
 				     mPanel2.setVisible(true);
@@ -278,7 +278,7 @@ public class MainTest {
 				     
 		
 				   }
-				});
+				});    */
 		
 		closepic.addMouseListener(new MouseAdapter(){
 			   public void mouseClicked(MouseEvent e) {
@@ -341,6 +341,34 @@ public class MainTest {
 		
 		
 		
+// OPEN NOTE!       wwwwwwwwwwhhhhhhhhhhhhhhhhhhhhyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy !!!!!!!!!!!111111
+		
+		for (int i=0; i<ntList.nilArr.size();i++){
+			ntList.nilArr.get(i).addMouseListener(new MouseAdapter(){
+				   public void mouseClicked(MouseEvent e) {
+					   SingleNoteView snvTest = new SingleNoteView(ntList.nilArr.get(1).getTitle(),ntList.nilArr.get(1).getText(),ntList.nilArr.get(1).getTags());
+					   panelGreen.add(snvTest);
+					   mPanel1.setVisible(false);
+					   mPanel2.setVisible(true);
+					   
+					 
+					   snvTest.nvbTest.backButton.addMouseListener(new MouseAdapter(){
+						   public void mouseClicked(MouseEvent e) {
+							  mPanel1.setVisible(true);
+							  mPanel2.setVisible(false);
+							  snvTest.setVisible(false);
+							  panelGreen.removeAll();
+						   }
+						   
+					   });
+					  
+					   }
+				  
+					});
+		}
+		
+		
+
 		
 		
 		
@@ -356,27 +384,87 @@ public class MainTest {
 		
 		  //TEST!!!!!
 		
-		  SingleNoteView snvTest = new SingleNoteView("Test title","text text text","tag tag tag");
+		 // SingleNoteView snvTest = new SingleNoteView("Test title","text text text","tag tag tag");
 		
 		  panelBlue.setBackground(new Color(170, 170,170));
 		  panelGreen.setBackground(Protocol.nbColor);
 		  
 		  
-		mPanel2.setPreferredSize(new Dimension(1300, 1000));
-		mPanel2.setLayout(new BorderLayout());
-		mPanel2.add(lpane, BorderLayout.CENTER);
+		
 		        lpane.setBounds(0, -100, 1300, 1000);
 		        panelBlue.add(newbg_label);
 		        panelBlue.setBounds(0,0, 1300, 1000);
 		        panelBlue.setOpaque(true);
-		        panelGreen.add(snvTest);
-		        panelGreen.setBounds(446, 260, 410,310);
+		        
+		        panelGreen.setBounds(446, 230, 410,340);
 		        panelGreen.setOpaque(true);
 		        lpane.add(panelBlue, new Integer(0), 0);
 		        lpane.add(panelGreen, new Integer(1), 0);
 		    
-		        
-		        
+		        mPanel2.setPreferredSize(new Dimension(1300, 1000));
+				mPanel2.setLayout(new BorderLayout());
+				mPanel2.add(lpane, BorderLayout.CENTER);     
+				
+				neww.addMouseListener(new MouseAdapter(){
+					   public void mouseClicked(MouseEvent e) {
+						    EditNoteView envTest = new EditNoteView("Type here","and here","and then here");
+				
+					        panelGreen.add(envTest); 
+					        mPanel1.setVisible(false);
+						     mPanel2.setVisible(true);
+					        
+							envTest.nvbTest.centerButton.addMouseListener(new MouseAdapter(){
+								   public void mouseClicked(MouseEvent e) {
+									  ntList.adds(envTest.titleArea.getText(),envTest.textArea.getText(),envTest.tagsArea.getText(),envTest.isFav());
+									  
+										ntList.nilArr.get(ntList.nilArr.size()-1).addMouseListener(new MouseAdapter(){
+											   public void mouseClicked(MouseEvent e) {
+												   SingleNoteView snvTest = new SingleNoteView(ntList.nilArr.get(1).getTitle(),ntList.nilArr.get(1).getText(),ntList.nilArr.get(1).getTags());
+												   panelGreen.add(snvTest);
+												   mPanel1.setVisible(false);
+												   mPanel2.setVisible(true);
+												   
+												 
+												  snvTest.nvbTest.backButton.addMouseListener(new MouseAdapter(){
+													   public void mouseClicked(MouseEvent e) {
+														  mPanel1.setVisible(true);
+														  mPanel2.setVisible(false);
+														  panelGreen.removeAll();
+														  
+													   }
+													   
+												   });   
+												  
+												   }
+											  
+												});
+									  
+									  
+									  
+									  
+									  
+									  mPanel2.setVisible(false);
+									  mPanel1.setVisible(true);
+									  panelGreen.removeAll();
+								   }  
+							   });
+							
+							envTest.nvbTest.backButton.addMouseListener(new MouseAdapter(){
+								   public void mouseClicked(MouseEvent e) {
+									  mPanel1.setVisible(true);
+									  mPanel2.setVisible(false);
+									  panelGreen.removeAll();
+								   }});
+					   }  
+				   });
+				
+				
+				
+
+				
+				
+				
+		       
 	//	newnote_panel.setOpaque(false);
 	//	newnote_panel.add(new NoteInList("Title4","text1","tag tag tag"));
 	//	mPanel2.add(newnote_panel);

@@ -12,6 +12,7 @@ import javax.swing.SwingConstants;
 
 public class SingleNoteView extends JPanel {
 	
+	private boolean fav;
 	
 	private JLabel titleLabel; 
 	private JLabel textLabel;
@@ -31,6 +32,9 @@ public class SingleNoteView extends JPanel {
 	private JLabel image = new JLabel();
 	private JLabel separ = new JLabel();
 	private JLabel del = new JLabel();
+	
+	
+	public NoteViewBottom nvbTest;
 
 	SingleNoteView(String title,String text,String tags){
 		titleLabel = new JLabel(title, SwingConstants.RIGHT);
@@ -58,7 +62,7 @@ public class SingleNoteView extends JPanel {
 		del.setPreferredSize(new Dimension(30,30));
 	//	top.add(del,BorderLayout.EAST);
 		
-		top.setPreferredSize(new Dimension(400, 30));
+		top.setPreferredSize(new Dimension(400, 50));
 		
 		//основной текст
 		
@@ -101,7 +105,7 @@ public class SingleNoteView extends JPanel {
 		
 		//TEST
 		
-		 NoteViewBottom nvbTest = new NoteViewBottom();
+		 nvbTest = new NoteViewBottom();
 	     nvbTest.create(1);
 	     nvbTest.setOpaque(true);
 	     
@@ -122,7 +126,41 @@ public class SingleNoteView extends JPanel {
 		
 		
 		
+	  // Fav
 	     
+	     nvbTest.favButton.addMouseListener(new MouseAdapter(){
+			   public void mouseClicked(MouseEvent e) {
+				 if (isFav()==true){
+					 nvbTest.favButton.setIcon(Protocol.favButton);
+					 fav=false;
+				 }
+				 else{
+					 nvbTest.favButton.setIcon(Protocol.favButtonAction);
+					 fav=true;
+				 }
+			   }
+		   });
+		
+			
+		 
+		 nvbTest.favButton.addMouseListener(new MouseAdapter(){
+			   public void mouseEntered(MouseEvent e) {
+				   if (isFav()==false){
+					   nvbTest.favButton.setIcon(Protocol.favButtonAction);  
+				   }
+			   }
+				  
+		});
+		 nvbTest.favButton.addMouseListener(new MouseAdapter(){
+			   public void mouseExited(MouseEvent e) {
+				   if (isFav()==true){
+					   nvbTest.favButton.setIcon(Protocol.favButtonAction);
+					   }
+					   else{
+						nvbTest.favButton.setIcon(Protocol.favButton);  
+					   }
+				   }
+		});
 	     
 	     
 	     
@@ -143,7 +181,7 @@ public class SingleNoteView extends JPanel {
 		
 		
 //		middle.setPreferredSize(new Dimension(410,250));
-		this.setPreferredSize(new Dimension(410,310));
+		this.setPreferredSize(new Dimension(410,340));
 		
 		
 		//PANEL COLORS 
@@ -171,6 +209,19 @@ public class SingleNoteView extends JPanel {
 				   }
 				});
 	}
+	
+	
+	//M
+	
+	public void setTitle(String title){
+		titleLabel.setText(title);
+	}
+	
+	public boolean isFav(){
+		return fav;
+	}
+	
+	
 	
 	}
 	
