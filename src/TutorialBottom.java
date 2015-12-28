@@ -106,6 +106,13 @@ public class TutorialBottom extends JPanel {
 			
 		}
 		
+		if(type ==4){
+			primaryButton.setIcon(Protocol.backButton);
+			primaryButtonPanel.add(primaryButton);
+			
+			this.add(primaryButtonPanel, BorderLayout.NORTH);	
+		}
+		
 		
 	//	this.add(buttons,BorderLayout.CENTER);
 		

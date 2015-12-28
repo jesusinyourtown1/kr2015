@@ -24,7 +24,7 @@ public class NoteList extends JPanel {
 	
 	
 	public void adds(String title,String text, String tags, boolean isFav){
-		NoteInList tmp_nil = new NoteInList(title,text,tags);
+		NoteInList tmp_nil = new NoteInList(title,text,tags,isFav);
 		nilArr.add(tmp_nil);
 		this.add(tmp_nil);
 	}

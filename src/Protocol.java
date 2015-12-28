@@ -78,6 +78,9 @@ public class Protocol {
 	public static  ImageIcon createButtonAction;
 	
 	
+	public static  ImageIcon infoPic;
+	
+	
 	
 	//TEST
 	static int counter;
@@ -228,6 +231,10 @@ public class Protocol {
 			myPicture = ImageIO.read(new File("createButtonAction.png")); // 
 			createButtonAction = new ImageIcon(Protocol.myPicture);
 			
+			
+			
+			myPicture = ImageIO.read(new File("infoo.png")); // 
+			infoPic = new ImageIcon(Protocol.myPicture);
 			
 			
 			

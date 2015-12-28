@@ -73,6 +73,7 @@ public class MainTest {
 		    final TutorialBottom bottomPanel1 = new TutorialBottom();  // tuto - start or skip
 		    final TutorialBottom bottomPanel2 = new TutorialBottom(); // tuto - next
 		    final TutorialBottom bottomPanel3 = new TutorialBottom();  // warning - i'm ready
+		    final TutorialBottom bottomPanel4 = new TutorialBottom();  // warning - i'm ready
 		    
 		    final JLabel tutoLabel1 = new JLabel();
 		    
@@ -286,13 +287,38 @@ public class MainTest {
 				   }
 				});
 		
+		
+		
+		bottomPanel4.create(4);
+		
 		info.addMouseListener(new MouseAdapter(){
 			   public void mouseClicked(MouseEvent e) {
 				   mPanel1.setVisible(false);
-				   infoPanel.setVisible(true);
+				   
+				   tutoLabel1.setIcon(Protocol.infoPic);
+				   bottomPanel3.setVisible(false);
+				   tutoPanel.add(bottomPanel4);
+				   
+				   tutoPanel.setVisible(true);
+				   
+				   
+				   bottomPanel4.primaryButton.addMouseListener(new MouseAdapter(){
+						 public void mouseClicked(MouseEvent e) { 
+							 tutoPanel.setVisible(false);
+							   mPanel1.setVisible(true);		 
+					 }
+					 });
+				   
+				   
+				   
+				   
+				   
+				   
 				   }
 				});
 		
+		
+//INFO PANEL
 		
 		
 		
@@ -341,12 +367,15 @@ public class MainTest {
 		
 		
 		
-// OPEN NOTE!       wwwwwwwwwwhhhhhhhhhhhhhhhhhhhhyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy !!!!!!!!!!!111111
+// FOR TEST NOTES (can be deleted later)
 		
 		for (int i=0; i<ntList.nilArr.size();i++){
+			final NoteInList tmpNil = ntList.nilArr.get(i);
 			ntList.nilArr.get(i).addMouseListener(new MouseAdapter(){
-				   public void mouseClicked(MouseEvent e) {
-					   SingleNoteView snvTest = new SingleNoteView(ntList.nilArr.get(1).getTitle(),ntList.nilArr.get(1).getText(),ntList.nilArr.get(1).getTags());
+				   public void mouseClicked(MouseEvent e) {	   
+					   
+					   
+					   SingleNoteView snvTest = new SingleNoteView(tmpNil.getTitle(),tmpNil.getText(),tmpNil.getTags(),tmpNil.getFav());
 					   panelGreen.add(snvTest);
 					   mPanel1.setVisible(false);
 					   mPanel2.setVisible(true);
@@ -358,6 +387,8 @@ public class MainTest {
 							  mPanel2.setVisible(false);
 							  snvTest.setVisible(false);
 							  panelGreen.removeAll();
+							  
+							  addInList(snvTest.getTitle(),snvTest.getText(),snvTest.getTags(),snvTest.isFav());
 						   }
 						   
 					   });
@@ -405,44 +436,22 @@ public class MainTest {
 				mPanel2.setLayout(new BorderLayout());
 				mPanel2.add(lpane, BorderLayout.CENTER);     
 				
+				
+				
+				
 				neww.addMouseListener(new MouseAdapter(){
 					   public void mouseClicked(MouseEvent e) {
-						    EditNoteView envTest = new EditNoteView("Type here","and here","and then here");
+						    EditNoteView envTest = new EditNoteView("Type here","and here","and then here",false,3);  // false - for isFav 
+						    // 3 - type for the NoteViewBottom
 				
 					        panelGreen.add(envTest); 
 					        mPanel1.setVisible(false);
 						     mPanel2.setVisible(true);
 					        
 							envTest.nvbTest.centerButton.addMouseListener(new MouseAdapter(){
+								//final NoteInList tmpNil = ntList.nilArr.get(ntList.nilArr.size()-1);
 								   public void mouseClicked(MouseEvent e) {
-									  ntList.adds(envTest.titleArea.getText(),envTest.textArea.getText(),envTest.tagsArea.getText(),envTest.isFav());
-									  
-										ntList.nilArr.get(ntList.nilArr.size()-1).addMouseListener(new MouseAdapter(){
-											   public void mouseClicked(MouseEvent e) {
-												   SingleNoteView snvTest = new SingleNoteView(ntList.nilArr.get(1).getTitle(),ntList.nilArr.get(1).getText(),ntList.nilArr.get(1).getTags());
-												   panelGreen.add(snvTest);
-												   mPanel1.setVisible(false);
-												   mPanel2.setVisible(true);
-												   
-												 
-												  snvTest.nvbTest.backButton.addMouseListener(new MouseAdapter(){
-													   public void mouseClicked(MouseEvent e) {
-														  mPanel1.setVisible(true);
-														  mPanel2.setVisible(false);
-														  panelGreen.removeAll();
-														  
-													   }
-													   
-												   });   
-												  
-												   }
-											  
-												});
-									  
-									  
-									  
-									  
-									  
+									  addInList(envTest.titleArea.getText(),envTest.textArea.getText(),envTest.tagsArea.getText(),envTest.isFav());
 									  mPanel2.setVisible(false);
 									  mPanel1.setVisible(true);
 									  panelGreen.removeAll();
@@ -457,32 +466,12 @@ public class MainTest {
 								   }});
 					   }  
 				   });
-				
-				
-				
 
-				
-				
-				
-		       
-	//	newnote_panel.setOpaque(false);
-	//	newnote_panel.add(new NoteInList("Title4","text1","tag tag tag"));
-	//	mPanel2.add(newnote_panel);
-	//	newbg_label.setIcon(Protocol.new_bg);
-	//	newbg_label.setBorder(null);
-		//layeredPane.add(newbg_label);
-	//	mPanel2.add(newbg_label);
-	//	layeredPane.add(new NoteInList("Title4","text1","tag tag tag"), new Integer(2));
-		
-	//	mPanel2.add(layeredPane,new Integer(2), 0);
 		
 		
 		//TEST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		        
 		  
-		
-
-		
 		
 		// adding to the main panel
 		mPanel.add(tutoPanel);
@@ -501,6 +490,48 @@ public class MainTest {
 		frame.setVisible(true);
 		
 	}	
+	 
+		// FOR NEW NOTE IN LIST!!  -- use THIS to add note in list (DON'T USE ADDS)
+		public void addInList(String title, String text,String tags,boolean isFav){
+			ntList.adds(title,text,tags,isFav);
+		    NoteInList tmpNil = ntList.nilArr.get(ntList.nilArr.size()-1);
+			tmpNil.addMouseListener(new MouseAdapter(){
+				   public void mouseClicked(MouseEvent e) {
+					   SingleNoteView snvTest = new SingleNoteView(title,text,tags,isFav);
+					   panelGreen.add(snvTest);
+					   mPanel1.setVisible(false);
+					   mPanel2.setVisible(true);
+					   
+					 
+					  snvTest.nvbTest.backButton.addMouseListener(new MouseAdapter(){
+						   public void mouseClicked(MouseEvent e) { 
+							  mPanel1.setVisible(true);
+							  mPanel2.setVisible(false);
+							  panelGreen.removeAll();
+							  addInList(snvTest.getTitle(),snvTest.getText(),snvTest.getTags(),snvTest.isFav());
+						   }   
+					   });   
+					  
+					  snvTest.nvbTest.centerButton.addMouseListener(new MouseAdapter(){
+						   public void mouseClicked(MouseEvent e) { 
+							   EditNoteView envTest = new EditNoteView(snvTest.getTitle(),snvTest.getText(),snvTest.getTags(),snvTest.isFav(),2);
+							//   panelGreen.removeAll();  // removing single note view
+							   snvTest.setVisible(false);
+							   panelGreen.add(envTest);
+							   
+						   }   
+					   });   
+					  
+					  
+					  
+					  
+					   }
+				  
+					});
+			
+			
+		}	 
+	 
 }
 
 

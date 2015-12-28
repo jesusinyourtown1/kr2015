@@ -3,6 +3,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Objects;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -39,7 +40,7 @@ public class EditNoteView extends JPanel {
 	private JLabel separ = new JLabel();
 	private JLabel del = new JLabel();
 
-	EditNoteView(String title,String text,String tags){
+	EditNoteView(String title,String text,String tags,boolean isFav,int type){
 		
 		
 		// FAV
@@ -122,7 +123,7 @@ public class EditNoteView extends JPanel {
 		//TEST
 		
 		 nvbTest = new NoteViewBottom();
-	     nvbTest.create(3);
+	     nvbTest.create(type);
 	     nvbTest.setOpaque(true);
 	     
 		 nvbTest.favButton.addMouseListener(new MouseAdapter(){
@@ -222,6 +223,27 @@ public class EditNoteView extends JPanel {
 		
 		EditNoteView obj = this;
 		
+		titleArea.addMouseListener(new MouseAdapter(){
+			   public void mouseClicked(MouseEvent e) {
+				if ( Objects.equals("Type here", titleArea.getText())) titleArea.setText("");
+				//top.setBackground(Protocol.greyColor);
+				   }
+				});
+		
+		textArea.addMouseListener(new MouseAdapter(){
+			   public void mouseClicked(MouseEvent e) {
+				if ( Objects.equals("Type here", textArea.getText())) textArea.setText("");
+				   }
+				});
+		tagsArea.addMouseListener(new MouseAdapter(){
+			   public void mouseClicked(MouseEvent e) {
+				if ( Objects.equals("Type here", tagsArea.getText())) tagsArea.setText("");
+				   }
+				});
+		
+		
+		
+		
 		del.addMouseListener(new MouseAdapter(){
 			   public void mouseClicked(MouseEvent e) {
 				     obj.setVisible(false);
@@ -232,17 +254,30 @@ public class EditNoteView extends JPanel {
 	}
 	
 	
+	
+
+	
+	
 	//FAV
 	
-	
 
-
-	
-	
-	
 	public boolean isFav(){
 		return fav;
 		
+	}
+	
+	//getters
+	
+	public String getTitle(){
+		return titleArea.getText();
+	}
+	
+	public String getText(){
+		return textArea.getText();
+	}
+	
+	public String getTags(){
+		return tagsArea.getText();
 	}
 	
 	

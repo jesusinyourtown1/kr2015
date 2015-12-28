@@ -44,10 +44,11 @@ public class NoteInList extends JPanel {
 
 	
 
-	NoteInList(String title,String text,String tags){
+	NoteInList(String title,String text,String tags,boolean isFav){
 		this.title=title;
 		this.text=text;
 		this.tags=tags;
+		this.isFav=isFav;
 		
 		//настраиваем текст
 		
@@ -152,11 +153,22 @@ public class NoteInList extends JPanel {
 		
 		//ACTION
 		
+		this.addMouseListener(new MouseAdapter(){
+			   public void mouseClicked(MouseEvent e) {
+				     obj.setVisible(false);
+				     remove(obj);
+				   //  notifyNoteList();
+		
+				   }
+				});
+	
+		
 		
 		
 		del.addMouseListener(new MouseAdapter(){
 			   public void mouseClicked(MouseEvent e) {
 				     obj.setVisible(false);
+				     remove(obj);
 				   //  notifyNoteList();
 		
 				   }

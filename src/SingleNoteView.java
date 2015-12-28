@@ -36,7 +36,7 @@ public class SingleNoteView extends JPanel {
 	
 	public NoteViewBottom nvbTest;
 
-	SingleNoteView(String title,String text,String tags){
+	SingleNoteView(String title,String text,String tags,boolean isFav){
 		titleLabel = new JLabel(title, SwingConstants.RIGHT);
 		textLabel = new JLabel(text, SwingConstants.RIGHT);
 		tagsLabel = new JLabel(tags, SwingConstants.RIGHT);
@@ -127,6 +127,12 @@ public class SingleNoteView extends JPanel {
 		
 		
 	  // Fav
+	     
+	     if (isFav){
+	    	 nvbTest.favButton.setIcon(Protocol.favButtonAction);
+			 fav=true; 
+	     }
+	     
 	     
 	     nvbTest.favButton.addMouseListener(new MouseAdapter(){
 			   public void mouseClicked(MouseEvent e) {
@@ -219,6 +225,21 @@ public class SingleNoteView extends JPanel {
 	
 	public boolean isFav(){
 		return fav;
+	}
+	
+	
+	//getters
+	
+	public String getTitle(){
+		return titleLabel.getText();
+	}
+	
+	public String getText(){
+		return textLabel.getText();
+	}
+	
+	public String getTags(){
+		return tagsLabel.getText();
 	}
 	
 	
