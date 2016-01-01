@@ -9,7 +9,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
 
 public class EditNoteView extends JPanel {
 	
@@ -46,8 +45,9 @@ public class EditNoteView extends JPanel {
 		// FAV
 			
 		 titleArea = new JTextArea(title);
-		 textArea = new JTextArea(title);
-		 tagsArea = new JTextArea(title);
+		 textArea = new JTextArea(text);
+		 tagsArea = new JTextArea(tags);
+		 fav = isFav;
 		
 		
 	//	titleLabel = new JLabel(title, SwingConstants.RIGHT);
@@ -221,7 +221,7 @@ public class EditNoteView extends JPanel {
 		
 		//ACTION
 		
-		EditNoteView obj = this;
+		final EditNoteView obj = this;
 		
 		titleArea.addMouseListener(new MouseAdapter(){
 			   public void mouseClicked(MouseEvent e) {
@@ -229,6 +229,8 @@ public class EditNoteView extends JPanel {
 				//top.setBackground(Protocol.greyColor);
 				   }
 				});
+		
+		titleArea.setSize(new Dimension(150,30));
 		
 		textArea.addMouseListener(new MouseAdapter(){
 			   public void mouseClicked(MouseEvent e) {

@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -205,7 +204,7 @@ public class SingleNoteView extends JPanel {
 		
 		//ACTION
 		
-		SingleNoteView obj = this;
+		final SingleNoteView obj = this;
 		
 		del.addMouseListener(new MouseAdapter(){
 			   public void mouseClicked(MouseEvent e) {
@@ -228,7 +227,7 @@ public class SingleNoteView extends JPanel {
 	}
 	
 	
-	//getters
+	//getters and setters 
 	
 	public String getTitle(){
 		return titleLabel.getText();
@@ -241,6 +240,21 @@ public class SingleNoteView extends JPanel {
 	public String getTags(){
 		return tagsLabel.getText();
 	}
+	
+	public void setTitleLabel(String title) {
+		this.titleLabel.setText(title);
+	}
+	public void setTextLabel(String text) {
+		this.textLabel.setText(text);
+	}
+	public void setTagsLabel(String tags) {
+		this.tagsLabel.setText(tags);
+	}
+	public void setFav(boolean isFav) {
+		this.fav=isFav;
+	}
+
+
 	
 	
 	

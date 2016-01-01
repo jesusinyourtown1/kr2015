@@ -5,7 +5,6 @@ import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -101,7 +100,8 @@ public class Protocol {
 	 public static Color accentColor= new Color(246,177,0);
 	 public static Color greyColor= new Color(206,206,206);
 	 
-	 
+	 //url
+	 URL url;
 	 
 	Protocol() {
 		try {
@@ -146,12 +146,15 @@ public class Protocol {
 			
 			//for tuto
 			
+			url = MainTest.class.getResource("/startTour.png");
 			myPicture = ImageIO.read(new File("startTour.png"));
-			startTour = new ImageIcon(Protocol.myPicture);
+			startTour = new ImageIcon(myPicture);
 			
+			url = MainTest.class.getResource("/startTourAction.png");
 			myPicture = ImageIO.read(new File("startTourAction.png"));
-			startTourAction = new ImageIcon(Protocol.myPicture);
+			startTourAction = new ImageIcon(myPicture);
 			
+			url = MainTest.class.getResource("/nextTour.png");
 			myPicture = ImageIO.read(new File("nextTour.png"));
 			nextTour = new ImageIcon(Protocol.myPicture);
 			
@@ -185,6 +188,7 @@ public class Protocol {
 			myPicture = ImageIO.read(new File("warning.png")); // 
 			warning = new ImageIcon(Protocol.myPicture);
 			
+			url = MainTest.class.getResource("/bugsWarn.png");
 			myPicture = ImageIO.read(new File("bugsWarn.png")); // 
 			bugsWarn = new ImageIcon(Protocol.myPicture);
 			

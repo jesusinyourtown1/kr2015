@@ -1,20 +1,14 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Observable;
-import java.util.Observer;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 
 public class NoteInList extends JPanel {
 	
@@ -22,6 +16,10 @@ public class NoteInList extends JPanel {
 	private String text;
 	private String tags;
 	private boolean isFav;
+	
+	
+	public int ind;
+	
 	
 	private JLabel titleLabel = new JLabel(this.title, SwingConstants.RIGHT);
 	private JLabel textLabel = new JLabel(this.text, SwingConstants.RIGHT);
@@ -40,7 +38,7 @@ public class NoteInList extends JPanel {
 	
 	private JLabel image = new JLabel();
 	private JLabel separ = new JLabel();
-	private JLabel del = new JLabel();
+	public JLabel del = new JLabel();
 
 	
 
@@ -106,7 +104,7 @@ public class NoteInList extends JPanel {
 		});
 		
 		
-		NoteInList obj = this;
+		final NoteInList obj = this;
 		
 	
 		

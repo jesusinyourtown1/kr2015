@@ -2,18 +2,20 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
-import java.util.Observer;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
 
 public class MainTest {
 	final JFrame frame = new JFrame("TagIT");
@@ -85,8 +87,8 @@ public class MainTest {
 	 //not GUI variables
 		Protocol p = new Protocol();
 		NoteList ntList = new NoteList();
-		
-		
+		int heightNotesList; 
+		InputOutputStream ioStream;
 		
 		
 		
@@ -110,9 +112,11 @@ public class MainTest {
 		 frame.setIconImage(img);
 		 
 		 
-		 
+		// mPanel.add(new JLabel("ttt"));
 		 
 //ALL ABOUT TUTORIAL PANEL 1
+		 
+		 tutoLabel1.setPreferredSize(new Dimension(1000,600));
 		 
 		 tutoPanel.setLayout(new BorderLayout());
 		 
@@ -199,13 +203,16 @@ public class MainTest {
 	
 		mPanel1.setLayout(new BorderLayout());
 		
+		// Scrollable 
+		ntList.setPreferredSize(new Dimension( 310,heightNotesList));
 		JScrollPane ntListScroll = new JScrollPane(ntList);
-		//ntListScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		ntListScroll.setPreferredSize(new Dimension( 330,700));
+		ntListScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
-		ntList.adds("English","From the sunny beaches","#eng #USA #homework",true);
-		ntList.adds("Swift","Swift Community -facebook.com/swift_kh","#swift #programming #iOS_dev",false);
-		ntList.adds("Games","To download: The Settlers 6","#games",true);
-		ntList.adds("Vsauce","To Google: How Shazam works?","#vsause #video",true);
+	//	addInList("English","From the sunny beaches","#eng #USA #homework",true);
+	//	addInList("Swift","Swift Community -facebook.com/swift_kh","#swift #programming #iOS_dev",false);
+	//	addInList("Games","To download: The Settlers 6","#games",true);
+	//	addInList("Vsauce","To Google: How Shazam works?","#vsause #video",true);
 
 		
 		info.setIcon(Protocol.info);
@@ -369,13 +376,13 @@ public class MainTest {
 		
 // FOR TEST NOTES (can be deleted later)
 		
-		for (int i=0; i<ntList.nilArr.size();i++){
+	/*	for (int i=0; i<ntList.nilArr.size();i++){
 			final NoteInList tmpNil = ntList.nilArr.get(i);
 			ntList.nilArr.get(i).addMouseListener(new MouseAdapter(){
 				   public void mouseClicked(MouseEvent e) {	   
 					   
 					   
-					   SingleNoteView snvTest = new SingleNoteView(tmpNil.getTitle(),tmpNil.getText(),tmpNil.getTags(),tmpNil.getFav());
+					   final SingleNoteView snvTest = new SingleNoteView(tmpNil.getTitle(),tmpNil.getText(),tmpNil.getTags(),tmpNil.getFav());
 					   panelGreen.add(snvTest);
 					   mPanel1.setVisible(false);
 					   mPanel2.setVisible(true);
@@ -396,7 +403,7 @@ public class MainTest {
 					   }
 				  
 					});
-		}
+		}*/
 		
 		
 
@@ -441,7 +448,7 @@ public class MainTest {
 				
 				neww.addMouseListener(new MouseAdapter(){
 					   public void mouseClicked(MouseEvent e) {
-						    EditNoteView envTest = new EditNoteView("Type here","and here","and then here",false,3);  // false - for isFav 
+						   final EditNoteView envTest = new EditNoteView("Type here","and here","and then here",false,3);  // false - for isFav 
 						    // 3 - type for the NoteViewBottom
 				
 					        panelGreen.add(envTest); 
@@ -489,15 +496,102 @@ public class MainTest {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
+		ioStream = new InputOutputStream("Notes.txt");
+		try {
+			readFromFile();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 	}	
 	 
+	 
+	 
+	 
+	 public void writeInFile() throws IOException{
+		 String tmpStr="";
+	
+		 for (int i=0; i<ntList.nilArr.size();i++){
+			tmpStr = tmpStr+ ntList.nilArr.get(i).getTitle()+"%"+ntList.nilArr.get(i).getText()+"%"+ntList.nilArr.get(i).getTags()+"%"+ntList.nilArr.get(i).getFav()+"/";
+		 }
+	     ioStream.clean();
+		 ioStream.write(tmpStr);  
+	 }
+	 
+	 public void readFromFile() throws IOException{
+		 String tmpStr="";
+		 String [] tmpArr;
+		 
+		 tmpStr=ioStream.read();
+		 tmpArr = tmpStr.split("/");
+		 
+		 for (int i=0; i<tmpArr.length;i++){
+			 String [] tmpArr1 = tmpArr[i].split("%");
+		//	 System.out.println((tmpArr1[0]+tmpArr1[1]+tmpArr1[2]+Boolean.parseBoolean(tmpArr1[3])));
+			 addInList(tmpArr1[0],tmpArr1[1],tmpArr1[2],Boolean.parseBoolean(tmpArr1[3]));
+		 }
+		 
+		 
+	 }
+	 
+
 		// FOR NEW NOTE IN LIST!!  -- use THIS to add note in list (DON'T USE ADDS)
-		public void addInList(String title, String text,String tags,boolean isFav){
+		public void addInList(final String title, final String text,final String tags,final boolean isFav){
+			heightNotesList = heightNotesList+145;
+			ntList.setPreferredSize(new Dimension( 310,heightNotesList));
+			
+			
 			ntList.adds(title,text,tags,isFav);
+			
+			ntList.nilArr.get(ntList.nilArr.size()-1).ind=ntList.nilArr.size()-1;
+			
+			try {
+			//	File fileToDelete = new File("Notes.txt");  
+		//		fileToDelete.delete();
+				
+			//	File file = new File("Notes.txt");
+		//		file.createNewFile();
+				
+				
+				
+			//	ioStream.clean();
+				writeInFile();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 		    NoteInList tmpNil = ntList.nilArr.get(ntList.nilArr.size()-1);
+		    
+		    tmpNil.del.addMouseListener(new MouseAdapter(){
+				   public void mouseClicked(MouseEvent e) {
+					   ntList.nilArr.remove(tmpNil.ind);
+					   heightNotesList = heightNotesList-145;
+					   ntList.setPreferredSize(new Dimension( 310,heightNotesList));
+					   
+					   try {
+					//	ioStream.clean();
+						writeInFile();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					   
+				   }   
+			   });   
+
+		    
 			tmpNil.addMouseListener(new MouseAdapter(){
 				   public void mouseClicked(MouseEvent e) {
-					   SingleNoteView snvTest = new SingleNoteView(title,text,tags,isFav);
+					   
+					   
+					   ntList.nilArr.remove(tmpNil.ind);
+					   
+					   heightNotesList = heightNotesList-145;
+					   ntList.setPreferredSize(new Dimension( 310,heightNotesList));
+					   
+					   final SingleNoteView snvTest = new SingleNoteView(title,text,tags,isFav);
 					   panelGreen.add(snvTest);
 					   mPanel1.setVisible(false);
 					   mPanel2.setVisible(true);
@@ -514,17 +608,43 @@ public class MainTest {
 					  
 					  snvTest.nvbTest.centerButton.addMouseListener(new MouseAdapter(){
 						   public void mouseClicked(MouseEvent e) { 
-							   EditNoteView envTest = new EditNoteView(snvTest.getTitle(),snvTest.getText(),snvTest.getTags(),snvTest.isFav(),2);
-							//   panelGreen.removeAll();  // removing single note view
-							   snvTest.setVisible(false);
-							   panelGreen.add(envTest);
+							  final EditNoteView envTest = new EditNoteView(snvTest.getTitle(),snvTest.getText(),snvTest.getTags(),snvTest.isFav(),2);
+							  	envTest.nvbTest.backButton.setVisible(false);
+							  //panelGreen.removeAll();
+							 	snvTest.setVisible(false);
+							 	panelGreen.add(envTest);
+							 
+							 
+							 
+							   // SAVE view -- 
+							   
+							 	  envTest.nvbTest.centerButton.addMouseListener(new MouseAdapter(){
+									   public void mouseClicked(MouseEvent e) { 
+										   snvTest.setTitleLabel(envTest.getTitle());
+										   snvTest.setTextLabel(envTest.getText());
+										   snvTest.setTagsLabel(envTest.getTags());
+										   snvTest.setFav(envTest.isFav());
+										   //panelGreen.removeAll();
+										   envTest.setVisible(false);
+										   envTest.nvbTest.backButton.setVisible(true);
+										   panelGreen.add(snvTest);
+										   snvTest.setVisible(true);
+								   
+									   }   
+								   });
+								   
+								   
+							   
+							   
+							   
+							   //   panelGreen.removeAll();  // removing single note view
 							   
 						   }   
 					   });   
 					  
 					  
 					  
-					  
+					    
 					   }
 				  
 					});
